@@ -198,28 +198,30 @@ module.exports = function () {
       return result;
     };
 
-    undoRedoActionFunctions.changeNodeLabel = function (param) {
-      var result = {
-      };
+    // param : { nodes: nodes, attrName: string, attrValue: a, firstTime : bool }
+    undoRedoActionFunctions.changeNodeAttr = function (param) {
+      var result = {};
+      var attrName = param.attrName
+      var attrValue = param.attrValue
       var nodes = param.nodes;
       result.nodes = nodes;
-      result.label = {};
+      result.attrName = attrName;
+      result.attrValue = {}
 
       for (var i = 0; i < nodes.length; i++) {
         var node = nodes[i];
-        result.label[node.id()] = node._private.data.label;
+        result.attrValue[node.id()] = node._private.data[attrName];
       }
 
       if (param.firstTime) {
-        nodes.data('label', param.label);
+        nodes.data(attrName, attrValue);
       }
       else {
         for (var i = 0; i < nodes.length; i++) {
           var node = nodes[i];
-          node._private.data.label = param.label[node.id()];
+          node._private.data[attrName] = param.attrValue[node.id()];
         }
       }
-
       return result;
     };
 

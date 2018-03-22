@@ -416,27 +416,32 @@ module.exports = function () {
   };
 
   /*
-   * Changes the label of the given nodes to the given label. Considers undoable option.
+   * Changes an attribute of the given nodes. Considers undoable option.
    */
-  mainUtilities.changeNodeLabel = function(nodes, label) {
+  mainUtilities.changeNodeAttr = function(nodes, attrName, attrValue) {
     if (nodes.length === 0) {
       return;
     }
 
     if (!options.undoable) {
-      nodes.data('label', label);
+      nodes.data(attrName, attrValue);
     }
     else {
       var param = {
         nodes: nodes,
-        label: label,
+        attrName: attrName,
+        attrValue: attrValue,
         firstTime: true
       };
 
-      cy.undoRedo().do("changeNodeLabel", param);
+      cy.undoRedo().do("changeNodeAttr", param);
     }
 
     cy.style().update();
+  };
+
+  mainUtilities.changeNodeLabel = function(nodes, label) {
+    mainUtilities.changeNodeAttr(nodes, 'label', label);
   };
 
   /*

@@ -30,7 +30,7 @@ module.exports = function () {
 
     // register general actions
     ur.action("resizeNodes", undoRedoActionFunctions.resizeNodes, undoRedoActionFunctions.resizeNodes);
-    ur.action("changeNodeLabel", undoRedoActionFunctions.changeNodeLabel, undoRedoActionFunctions.changeNodeLabel);
+    ur.action("changeNodeAttr", undoRedoActionFunctions.changeNodeAttr, undoRedoActionFunctions.changeNodeAttr);
     ur.action("changeData", undoRedoActionFunctions.changeData, undoRedoActionFunctions.changeData);
     ur.action("changeCss", undoRedoActionFunctions.changeCss, undoRedoActionFunctions.changeCss);
     ur.action("changeBendPoints", undoRedoActionFunctions.changeBendPoints, undoRedoActionFunctions.changeBendPoints);
